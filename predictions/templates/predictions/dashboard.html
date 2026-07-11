@@ -1,0 +1,68 @@
+{% extends 'predictions/base.html' %}
+
+{% block title %}Dashboard - WC Predictor{% endblock %}
+{% block page_title %}Tableau de Bord{% endblock %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Top Favoris -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                <i class="fas fa-crown text-yellow-500"></i>
+                Top 10 Favoris pour 2026
+            </h3>
+            
+            <div class="space-y-3">
+                {% for team in top_favoris %}
+                <div class="flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors rounded-xl p-4">
+                    <div class="flex items-center gap-4">
+                        <span class="w-8 h-8 flex items-center justify-center bg-blue-100 text-blue-700 font-bold rounded-lg text-sm">
+                            {{ team.index }}
+                        </span>
+                        <div>
+                            <p class="font-semibold text-gray-800">{{ team.pays }}</p>
+                            <p class="text-sm text-gray-500">Rang FIFA : {{ team.rang_actuel }}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold text-blue-600">{{ team.score }}</div>
+                        <div class="text-xs text-gray-500">points simulés</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Stats rapides -->
+        <div class="space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                <h3 class="text-lg font-semibold mb-4">Statistiques Clés</h3>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="border border-gray-100 rounded-xl p-4">
+                        <p class="text-3xl font-bold text-emerald-600">16</p>
+                        <p class="text-sm text-gray-600">Équipes analysées</p>
+                    </div>
+                    <div class="border border-gray-100 rounded-xl p-4">
+                        <p class="text-3xl font-bold text-amber-600">{{ top_favoris|length }}</p>
+                        <p class="text-sm text-gray-600">Favoris forts</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-2xl p-6">
+                <h4 class="font-medium mb-2">Prochain match simulé</h4>
+                <p class="text-2xl font-bold">France vs Brésil</p>
+                <p class="text-blue-100 mt-1">Probabilité de victoire France : <span class="font-bold">58%</span></p>
+                <a href="{% url 'predictions:match_predictor' %}" 
+                   class="mt-4 inline-block bg-white text-blue-700 px-5 py-2.5 rounded-xl font-medium hover:bg-gray-100 transition">
+                    Faire une confrontation →
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
