@@ -13,6 +13,5 @@
       "src": "/(.*)",
       "dest": "**/wsgi.py"
     }
-  ],
-  "excludeFiles": "**/.*"
+  ]
 }
