@@ -1,11 +1,15 @@
 {
-  "builds": [{
-    "src": "*.py",
-    "use": "@vercel/python",
-    "config": { "runtime": "python3.12" }
-  }],
-  "routes": [{
-    "src": "/(.*)",
-    "dest": "/"
-  }]
+  "builds": [
+    {
+      "src": "**/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "runtime": "python3.12" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "**/wsgi.py"
+    }
+  ]
 }
